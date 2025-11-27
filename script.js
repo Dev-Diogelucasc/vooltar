@@ -213,9 +213,9 @@ startMissionButton?.addEventListener("click", () => {
   window.open(whatsappURL, "_blank");
 });
 
-const footerYearContainer = document.querySelector(".footer-copy");
-if (footerYearContainer) {
-  footerYearContainer.innerHTML = `Pressione play para reviver tudo outra vez &copy; ${new Date().getFullYear()}`;
+const footerYearValue = document.getElementById("footer-year");
+if (footerYearValue) {
+  footerYearValue.textContent = new Date().getFullYear();
 }
 
 // Loading screen
@@ -223,7 +223,7 @@ const loader = document.getElementById("loader");
 window.addEventListener("load", () => {
   setTimeout(() => {
     loader.classList.add("hidden");
-  }, 3500);
+  }, 4000);
 });
 
 // Timeline scroll reveal
