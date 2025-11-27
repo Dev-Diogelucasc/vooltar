@@ -220,8 +220,14 @@ if (footerYearValue) {
 
 // Loading screen
 const loader = document.getElementById("loader");
+const heroSection = document.getElementById("home");
 window.addEventListener("load", () => {
   setTimeout(() => {
+    if (heroSection) {
+      heroSection.scrollIntoView({ behavior: "auto", block: "start" });
+    } else {
+      window.scrollTo({ top: 0, behavior: "auto" });
+    }
     loader.classList.add("hidden");
   }, 4000);
 });
