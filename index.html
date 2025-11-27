@@ -19,11 +19,27 @@
   <body>
     <div class="loader" id="loader">
       <div class="loader-content">
-        <h2 class="loader-title">True <span>Love</span> Stories</h2>
+        <p class="loader-eyebrow">Inicializando missão secreta</p>
+        <p class="loader-subtitle">Gabriely ♥ Diógenes</p>
+        <div class="loader-photo">
+          <img
+            src="assets/images/capa.jpeg"
+            alt="Gabriely e Diógenes em close"
+          />
+        </div>
         <div class="loader-bar">
           <div class="loader-progress"></div>
         </div>
         <p class="loader-text">Carregando memórias...</p>
+        <div class="loader-metrics">
+          <article>
+            <span>Estado</span>
+            <strong>Love in progress</strong>
+          </article>
+        </div>
+        <p class="loader-tip">
+          Dica neon: ativa o som e deixa o coração em modo cinema.
+        </p>
       </div>
     </div>
     <header class="hero" id="home">
@@ -110,6 +126,13 @@
         <div class="section-header">
           <p class="eyebrow">Capturas favoritas</p>
           <h2>Galeria Vice</h2>
+        </div>
+        <div class="gallery-tip">
+          <span class="gallery-tip__icon">✦</span>
+          <p>
+            Clique nas fotos e vídeos para abrir a memória completa em tela
+            cheia.
+          </p>
         </div>
         <div class="gallery-grid">
           <figure
@@ -231,7 +254,7 @@
             data-type="image"
             data-index="8"
             data-src="assets/images/perfect.jpeg"
-            data-caption="Perfect pumping e você me beijandp e me mantendo mais forte."
+            data-caption="Perfect pumping é você me beijando e me mantendo mais forte."
           >
             <img
               src="assets/images/perfect.jpeg"
@@ -245,7 +268,7 @@
             data-type="video"
             data-index="9"
             data-src="assets/images/sempalavras.mp4"
-            data-caption="Sem palavras, só seu beijo doce avisando que o mundo está seguro."
+            data-caption="Sem palavras, somente seu beijo doce avisando que o mundo está seguro."
           >
             <video
               src="assets/images/sempalavras.mp4"
@@ -334,7 +357,7 @@
       <section class="timeline" id="timeline">
         <div class="section-header">
           <p class="eyebrow">Linha do tempo</p>
-          <h2>Memórias desbloqueadas</h2>
+          <h2>Memórias.</h2>
         </div>
         <ol class="timeline-list">
           <li class="timeline-item">
@@ -363,6 +386,7 @@
         </ol>
       </section>
 
+
       <section class="mixtape">
         <div class="section-header">
           <p class="eyebrow">Extras colecionáveis</p>
@@ -383,41 +407,10 @@
             <h3>Mapa secreto</h3>
             <p>
               Lista de lugares que ainda vamos invadir juntos. Spoiler: praias e
-              diners clássicos.
+              restaurantes clássicos.
             </p>
           </article>
         </div>
-      </section>
-
-      <section class="cta" id="rsvp">
-        <div>
-          <p class="eyebrow">Próximo episódio</p>
-          <h2>Reserva de missão</h2>
-          <p>Escolha a data, junta o outfit e aperta start.</p>
-        </div>
-        <form class="cta-form" data-whatsapp-form>
-          <label>
-            Data ideal
-            <input type="date" name="date" />
-          </label>
-          <label>
-            Local dos sonhos
-            <input
-              type="text"
-              name="place"
-              placeholder="Ex: Pôr do sol na praia"
-            />
-          </label>
-          <label>
-            Mood da noite
-            <select name="mood">
-              <option>Noite neon</option>
-              <option>Roadtrip</option>
-              <option>Cinema + pipoca</option>
-            </select>
-          </label>
-          <button type="submit">Start Mission</button>
-        </form>
       </section>
 
       <section class="promises" id="promises">
@@ -452,14 +445,80 @@
           </article>
         </div>
       </section>
+
+      <section class="cta" id="rsvp">
+        <div>
+          <h2>Reserva de missão</h2>
+          <p>Escolha a data, junta o outfit e aperta start.</p>
+        </div>
+        <form class="cta-form" data-whatsapp-form>
+          <label>
+            Data ideal
+            <input type="date" name="date" />
+          </label>
+          <label>
+            Local dos sonhos
+            <input
+              type="text"
+              name="place"
+              placeholder="Ex: Pôr do sol na praia"
+            />
+          </label>
+          <label>
+            Mood da noite
+            <select name="mood">
+              <option>Noite neon</option>
+              <option>Roadtrip</option>
+              <option>Cinema + pipoca</option>
+            </select>
+          </label>
+          <button type="submit">Start Mission</button>
+        </form>
+      </section>
+
+      
     </main>
 
     <footer class="footer">
-      <div>
-        <span class="badge">True Love Stories</span>
-        <p>Feito com carinho em 2025.</p>
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <span class="badge">True Love Stories</span>
+          <h3>Gabriely &amp; Diógenes</h3>
+          <p>
+            Nossa central de memórias neon, atualizada sempre que surge um
+            capítulo novo dessa história improvável.
+          </p>
+        </div>
+        <div class="footer-links">
+          <p class="footer-label">Navegação</p>
+          <a href="#story">História</a>
+          <a href="#gallery">Galeria</a>
+          <a href="#timeline">Memórias</a>
+          <a href="#promises">Promessas</a>
+          <a href="#rsvp">Próxima missão</a>
+        </div>
+        <div class="footer-cta">
+          <p class="footer-label">Próximo episódio</p>
+          <p>
+            Escolhe o outfit, eu cuido da trilha sonora. Bora planejar o
+            reencontro?
+          </p>
+          <a class="footer-button" href="#rsvp">Agendar missão</a>
+          <p class="footer-secondary">
+            Ou manda um oi no WhatsApp e bora fugir.
+          </p>
+        </div>
       </div>
-      <p class="footer-copy">Pressione play para reviver tudo outra vez.</p>
+      <div class="footer-bottom">
+        <p>
+          © <span id="footer-year">2025</span> Love Stories • Base Natal/RN.
+        </p>
+        <div class="footer-tags">
+          <span>Love XP +99</span>
+          <span>Modo campanha</span>
+          <span>Neon feelings</span>
+        </div>
+      </div>
     </footer>
 
     <div class="lightbox" id="lightbox">

@@ -223,7 +223,7 @@ const loader = document.getElementById("loader");
 window.addEventListener("load", () => {
   setTimeout(() => {
     loader.classList.add("hidden");
-  }, 2200);
+  }, 3500);
 });
 
 // Timeline scroll reveal
@@ -260,6 +260,7 @@ const closeBtn = document.querySelector(".lightbox-close");
 const prevBtn = document.querySelector(".lightbox-prev");
 const nextBtn = document.querySelector(".lightbox-next");
 const galleryCards = document.querySelectorAll(".gallery-card[data-index]");
+const timelineSection = document.getElementById("timeline");
 
 let currentIndex = 0;
 const totalItems = galleryCards.length;
@@ -321,7 +322,14 @@ const closeLightbox = () => {
 };
 
 const showNext = () => {
-  currentIndex = (currentIndex + 1) % totalItems;
+  const isLastItem = currentIndex === totalItems - 1;
+  if (isLastItem) {
+    closeLightbox();
+    timelineSection?.scrollIntoView({ behavior: "smooth", block: "start" });
+    return;
+  }
+
+  currentIndex = Math.min(currentIndex + 1, totalItems - 1);
   openLightbox(currentIndex);
 };
 
