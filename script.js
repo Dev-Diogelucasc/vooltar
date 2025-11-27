@@ -253,6 +253,9 @@ const lightbox = document.getElementById("lightbox");
 const lightboxImage = document.querySelector(".lightbox-image");
 const lightboxVideo = document.querySelector(".lightbox-video");
 const lightboxCaption = document.querySelector(".lightbox-caption");
+const lightboxCaptionLabel = document.querySelector(".lightbox-caption-label");
+const lightboxMedia = document.querySelector(".lightbox-media");
+const lightboxCaptionCard = document.querySelector(".lightbox-caption-card");
 const closeBtn = document.querySelector(".lightbox-close");
 const prevBtn = document.querySelector(".lightbox-prev");
 const nextBtn = document.querySelector(".lightbox-next");
@@ -261,19 +264,37 @@ const galleryCards = document.querySelectorAll(".gallery-card[data-index]");
 let currentIndex = 0;
 const totalItems = galleryCards.length;
 
+const triggerLightboxAnimation = (element) => {
+  if (!element) return;
+  element.classList.remove("is-animating");
+  void element.offsetWidth;
+  element.classList.add("is-animating");
+};
+
 const openLightbox = (index) => {
   currentIndex = index;
   const card = galleryCards[index];
   const src = card.dataset.src;
-  const caption = card.querySelector("figcaption").textContent;
+  const caption =
+    card.dataset.caption || card.querySelector("figcaption").textContent;
   const isVideo = card.dataset.type === "video";
+  const labelText =
+    card.querySelector("figcaption")?.textContent?.trim() || "Cena favorita";
 
   lightboxCaption.textContent = caption;
+  if (lightboxCaptionLabel) {
+    lightboxCaptionLabel.textContent = labelText;
+  }
 
   if (isVideo) {
     lightboxVideo.src = src;
     lightboxVideo.classList.add("active");
     lightboxImage.classList.remove("active");
+    lightboxVideo
+      .play()
+      .catch((error) =>
+        console.warn("Não foi possível reproduzir o vídeo", error)
+      );
   } else {
     lightboxImage.src = src;
     lightboxImage.alt = caption;
@@ -284,6 +305,8 @@ const openLightbox = (index) => {
 
   lightbox.classList.add("active");
   document.body.style.overflow = "hidden";
+  triggerLightboxAnimation(lightboxMedia);
+  triggerLightboxAnimation(lightboxCaptionCard);
 };
 
 const closeLightbox = () => {
@@ -291,6 +314,10 @@ const closeLightbox = () => {
   document.body.style.overflow = "";
   lightboxVideo.pause();
   lightboxVideo.src = "";
+  lightboxImage.src = "";
+  [lightboxMedia, lightboxCaptionCard].forEach((element) =>
+    element?.classList.remove("is-animating")
+  );
 };
 
 const showNext = () => {
