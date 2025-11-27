@@ -204,7 +204,14 @@ img {
   text-transform: uppercase;
   letter-spacing: 0.3em;
   font-size: 0.8rem;
+  display: inline-block;
   color: var(--muted);
+  background: linear-gradient(120deg, var(--text), var(--accent), var(--accent-2), var(--text));
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradient-shift 6s ease-in-out infinite;
 }
 
 .hero h1 {
@@ -277,6 +284,69 @@ img {
   padding: 0.85rem 2rem;
   border-radius: 999px;
   cursor: pointer;
+}
+
+.ghost--accent {
+  border-color: var(--accent);
+  color: var(--accent);
+  transition: color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.ghost--accent:hover {
+  border-color: var(--accent-2);
+  color: var(--accent-2);
+  box-shadow: 0 0 20px rgba(255, 77, 154, 0.4);
+}
+
+.ghost--audio {
+  border-color: rgba(255, 255, 255, 0.35);
+  color: var(--text);
+  position: relative;
+  padding-left: 2.8rem;
+  transition: border-color 0.3s ease, color 0.3s ease;
+}
+
+.ghost--audio::before,
+.ghost--audio::after {
+  content: "";
+  position: absolute;
+  left: 1.2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  border-radius: 50%;
+  border: 2px solid currentColor;
+  opacity: 0.6;
+}
+
+.ghost--audio::before {
+  width: 0.3rem;
+  height: 0.3rem;
+}
+
+.ghost--audio::after {
+  width: 1.1rem;
+  height: 1.1rem;
+  animation: audio-pulse 1.8s ease-in-out infinite;
+}
+
+.ghost--audio.is-playing {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+@keyframes audio-pulse {
+  0% {
+    transform: translateY(-50%) scale(0.9);
+    opacity: 0.4;
+  }
+  50% {
+    transform: translateY(-50%) scale(1.1);
+    opacity: 0.9;
+  }
+  100% {
+    transform: translateY(-50%) scale(0.9);
+    opacity: 0.4;
+  }
 }
 
 .hero-meta {
@@ -882,6 +952,84 @@ main {
   border: 1px solid var(--stroke);
   padding: 0.5rem 1rem;
   border-radius: 999px;
+}
+
+.letter-modal {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 11000;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+.letter-modal.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.letter-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(6, 1, 15, 0.92);
+  backdrop-filter: blur(12px);
+}
+
+.letter-dialog {
+  position: relative;
+  width: min(520px, 90vw);
+  background: rgba(15, 3, 31, 0.9);
+  border: 1px solid var(--stroke);
+  border-radius: 1.5rem;
+  padding: 2.5rem 2rem 2rem;
+  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.65);
+  z-index: 1;
+}
+
+.letter-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: transparent;
+  border: none;
+  color: var(--muted);
+  font-size: 1.8rem;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.letter-eyebrow {
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-size: 0.75rem;
+}
+
+.letter-dialog h3 {
+  font-family: "Archivo Black", sans-serif;
+  text-transform: uppercase;
+  margin: 1rem 0;
+  font-size: 1.4rem;
+}
+
+.letter-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  color: var(--text);
+  line-height: 1.7;
+}
+
+.letter-body p {
+  font-family: "Space Grotesk", sans-serif;
+  color: var(--text);
+}
+
+#letter-audio {
+  display: none;
 }
 
 @media (max-width: 720px) {

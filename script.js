@@ -91,6 +91,13 @@ galleryImages.forEach((image) => {
 
 const sfxButton = document.querySelector("[data-sfx]");
 const body = document.body;
+const letterModal = document.getElementById("letter-modal");
+const letterTrigger = document.querySelector("[data-letter-trigger]");
+const letterDismissControls = document.querySelectorAll(
+  "[data-letter-dismiss]"
+);
+const letterAudio = document.getElementById("letter-audio");
+const audioTrigger = document.querySelector("[data-audio-trigger]");
 
 if (sfxButton) {
   sfxButton.addEventListener("click", () => {
@@ -100,6 +107,61 @@ if (sfxButton) {
       : "Play Vibe";
   });
 }
+
+const openLetterModal = () => {
+  if (!letterModal) return;
+  letterModal.classList.add("active");
+  letterModal.setAttribute("aria-hidden", "false");
+  document.body.style.overflow = "hidden";
+};
+
+const closeLetterModal = () => {
+  if (!letterModal) return;
+  letterModal.classList.remove("active");
+  letterModal.setAttribute("aria-hidden", "true");
+  document.body.style.overflow = "";
+};
+
+if (letterTrigger) {
+  letterTrigger.addEventListener("click", openLetterModal);
+}
+
+letterDismissControls.forEach((control) =>
+  control.addEventListener("click", closeLetterModal)
+);
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape" && letterModal?.classList.contains("active")) {
+    closeLetterModal();
+  }
+});
+
+const toggleAudioPlayback = async () => {
+  if (!letterAudio || !audioTrigger) return;
+
+  try {
+    if (letterAudio.paused) {
+      await letterAudio.play();
+      audioTrigger.classList.add("is-playing");
+      audioTrigger.textContent = "Pausar mensagem";
+    } else {
+      letterAudio.pause();
+      audioTrigger.classList.remove("is-playing");
+      audioTrigger.textContent = "Ouvir mensagem";
+    }
+  } catch (error) {
+    console.error("Falha ao tocar áudio", error);
+  }
+};
+
+if (audioTrigger) {
+  audioTrigger.addEventListener("click", toggleAudioPlayback);
+}
+
+letterAudio?.addEventListener("ended", () => {
+  audioTrigger?.classList.remove("is-playing");
+  if (audioTrigger) audioTrigger.textContent = "Ouvir mensagem";
+});
 
 const footerYearContainer = document.querySelector(".footer-copy");
 if (footerYearContainer) {

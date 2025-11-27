@@ -38,7 +38,9 @@
       </nav>
 
       <div class="hero-content">
-        <p class="hero-label">Edição Limitada</p>
+        <p class="hero-label">
+          Você me encontrou num domingo cinza e pintou tudo neon.
+        </p>
         <h1>
           Nosso amor<br />
           merecia um trailer <span class="stroke">digno de Hollywood</span>
@@ -50,6 +52,12 @@
         <div class="hero-cta">
           <a class="btn" href="#gallery">Ver Fotos</a>
           <button class="ghost" data-sfx>Play Vibe</button>
+          <button class="ghost ghost--accent" data-letter-trigger>
+            Ler Carta
+          </button>
+          <button class="ghost ghost--audio" data-audio-trigger>
+            Ouvir mensagem
+          </button>
         </div>
         <div class="hero-meta">
           <div>
@@ -409,6 +417,48 @@
       </div>
       <button class="lightbox-next" aria-label="Próximo">›</button>
     </div>
+
+    <div class="letter-modal" id="letter-modal" aria-hidden="true">
+      <div class="letter-backdrop" data-letter-dismiss></div>
+      <div class="letter-dialog" role="dialog" aria-modal="true">
+        <button
+          class="letter-close"
+          aria-label="Fechar carta"
+          data-letter-dismiss
+        >
+          ×
+        </button>
+        <p class="letter-eyebrow">Carta aberta</p>
+        <h3>Ei, você é o amor da minha vida</h3>
+        <div class="letter-body">
+          <p>
+            Não há um segundo em que eu não esteja pensando em você. Um vazio
+            imenso me consome cada dia mais e tudo que eu queria era conversar,
+            te ver, te sentir.
+          </p>
+          <p>
+            Volto sempre para nossa primeira viagem: não tínhamos nem um mês e
+            já decidimos fugir para Maceió. Foi uma das melhores viagens da
+            minha vida e ali eu soube que podia viver qualquer aventura ao seu
+            lado.
+          </p>
+          <p>
+            Seu abraço resolve tanta coisa, toda a bagunça que tem na minha
+            mente. A dor a cada dia fica mais pesada e o silêncio está me
+            quebrando.
+          </p>
+          <p>
+            Perdão, Gigi. Eu só precisava te dizer a dimensão da falta que você
+            faz e o quanto ainda te amo.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <audio id="letter-audio" preload="auto">
+      <source src="assets/audio/carta.mp3" type="audio/mpeg" />
+      Seu navegador não suporta áudio HTML5.
+    </audio>
 
     <script src="script.js" defer></script>
   </body>
