@@ -104,6 +104,7 @@ const videoModal = document.getElementById("video-modal");
 const videoTrigger = document.querySelector("[data-video-trigger]");
 const videoDismissControls = document.querySelectorAll("[data-video-dismiss]");
 const videoPlayer = document.querySelector(".video-player");
+const startMissionButton = document.querySelector("[data-start-mission]");
 
 if (sfxButton) {
   sfxButton.addEventListener("click", () => {
@@ -201,6 +202,15 @@ document.addEventListener("keydown", (event) => {
   if (event.key === "Escape" && audioModal?.classList.contains("active")) {
     closeAudioModal();
   }
+});
+
+startMissionButton?.addEventListener("click", () => {
+  const phone = "5534998982511";
+  const message = "Vamos iniciar nossa nova missão!";
+  const whatsappURL = `https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(
+    message
+  )}`;
+  window.open(whatsappURL, "_blank");
 });
 
 const footerYearContainer = document.querySelector(".footer-copy");

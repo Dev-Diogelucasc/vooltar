@@ -405,6 +405,17 @@ img {
   }
 }
 
+.pulse-link {
+  background: transparent;
+  border: none;
+  color: var(--text);
+  font-family: inherit;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+}
+
 .hero-badge {
   position: absolute;
   bottom: 2rem;
