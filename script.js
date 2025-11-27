@@ -98,6 +98,10 @@ const letterDismissControls = document.querySelectorAll(
 );
 const letterAudio = document.getElementById("letter-audio");
 const audioTrigger = document.querySelector("[data-audio-trigger]");
+const videoModal = document.getElementById("video-modal");
+const videoTrigger = document.querySelector("[data-video-trigger]");
+const videoDismissControls = document.querySelectorAll("[data-video-dismiss]");
+const videoPlayer = document.querySelector(".video-player");
 
 if (sfxButton) {
   sfxButton.addEventListener("click", () => {
@@ -130,9 +134,41 @@ letterDismissControls.forEach((control) =>
   control.addEventListener("click", closeLetterModal)
 );
 
+const openVideoModal = () => {
+  if (!videoModal) return;
+  videoModal.classList.add("active");
+  videoModal.setAttribute("aria-hidden", "false");
+  document.body.style.overflow = "hidden";
+  videoPlayer
+    ?.play()
+    .catch((error) => console.warn("Falha ao iniciar vídeo do modal", error));
+};
+
+const closeVideoModal = () => {
+  if (!videoModal) return;
+  videoModal.classList.remove("active");
+  videoModal.setAttribute("aria-hidden", "true");
+  document.body.style.overflow = "";
+  if (videoPlayer) {
+    videoPlayer.pause();
+    videoPlayer.currentTime = 0;
+  }
+};
+
+if (videoTrigger) {
+  videoTrigger.addEventListener("click", openVideoModal);
+}
+
+videoDismissControls.forEach((control) =>
+  control.addEventListener("click", closeVideoModal)
+);
+
 document.addEventListener("keydown", (event) => {
   if (event.key === "Escape" && letterModal?.classList.contains("active")) {
     closeLetterModal();
+  }
+  if (event.key === "Escape" && videoModal?.classList.contains("active")) {
+    closeVideoModal();
   }
 });
 

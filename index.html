@@ -58,6 +58,9 @@
           <button class="ghost ghost--audio" data-audio-trigger>
             Ouvir mensagem
           </button>
+          <button class="ghost ghost--video" data-video-trigger>
+            Ver vídeo
+          </button>
         </div>
         <div class="hero-meta">
           <div>
@@ -145,6 +148,7 @@
               src="assets/images/roadtrip.mp4"
               autoplay
               loop
+              muted
               playsinline
             ></video>
             <figcaption>Roadtrip sem destino.</figcaption>
@@ -173,7 +177,7 @@
               alt="Show neon com dança sincronizada"
               loading="lazy"
             />
-            <figcaption>Show neon com dança sincronizada.</figcaption>
+            <figcaption>Show neon + dança sincronizada.</figcaption>
           </figure>
           <figure
             class="gallery-card"
@@ -228,16 +232,18 @@
             <figcaption>Perfect Pumping.</figcaption>
           </figure>
           <figure
-            class="gallery-card"
-            data-type="image"
-            data-index="9"
-            data-src="assets/images/folego.jpeg"
+            class="gallery-card gallery-card--video"
+            data-type="video"
+            data-index="11"
+            data-src="assets/images/drink.mp4"
           >
-            <img
-              src="assets/images/folego.jpeg"
-              alt="Sem palavras"
-              loading="lazy"
-            />
+            <video
+              src="assets/images/sempalavras.mp4"
+              autoplay
+              loop
+              muted
+              playsinline
+            ></video>
             <figcaption>Sem Palavras.</figcaption>
           </figure>
           <figure
@@ -263,6 +269,7 @@
               src="assets/images/drink.mp4"
               autoplay
               loop
+              muted
               playsinline
             ></video>
             <figcaption>Noite Neon + Drink.</figcaption>
@@ -452,6 +459,27 @@
             faz e o quanto ainda te amo.
           </p>
         </div>
+      </div>
+    </div>
+
+    <div class="video-modal" id="video-modal" aria-hidden="true">
+      <div class="video-backdrop" data-video-dismiss></div>
+      <div class="video-dialog" role="dialog" aria-modal="true">
+        <button
+          class="video-close"
+          aria-label="Fechar vídeo"
+          data-video-dismiss
+        >
+          ×
+        </button>
+        <p class="video-eyebrow">Cena favorita</p>
+        <h3>Nosso trailer tropical</h3>
+        <video
+          class="video-player"
+          src="assets/images/videofinal.mp4"
+          controls
+          playsinline
+        ></video>
       </div>
     </div>
 
