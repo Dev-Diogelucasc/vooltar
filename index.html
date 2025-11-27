@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vice Love Stories</title>
+    <meta
+      name="description"
+      content="Landing page inspirada em GTA para guardar fotos e memórias com meu amor."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="loader" id="loader">
+      <div class="loader-content">
+        <h2 class="loader-title">Vice <span>Love</span> Stories</h2>
+        <div class="loader-bar">
+          <div class="loader-progress"></div>
+        </div>
+        <p class="loader-text">Carregando memórias...</p>
+      </div>
+    </div>
+    <header class="hero" id="home">
+      <nav class="nav">
+        <div class="brand">Vice <span>Love</span></div>
+        <div class="nav-links">
+          <a href="#story">História</a>
+          <a href="#gallery">Galeria</a>
+          <a href="#timeline">Memórias</a>
+          <a href="#rsvp" class="pill">Próxima Aventura</a>
+        </div>
+      </nav>
+
+      <div class="hero-content">
+        <p class="hero-label">Edição Limitada</p>
+        <h1>
+          Nosso amor<br />
+          merecia um trailer <span class="stroke">digno de Hollywood</span>
+        </h1>
+        <p class="hero-copy">
+          Clima tropical, neon, coração acelerado. Guardamos aqui as cenas
+          favoritas da nossa história para assistir em loop.
+        </p>
+        <div class="hero-cta">
+          <a class="btn" href="#gallery">Ver Fotos</a>
+          <button class="ghost" data-sfx>Play Vibe</button>
+        </div>
+        <div class="hero-meta">
+          <div>
+            <span>Cidade base</span>
+            <strong>Natal, RN</strong>
+          </div>
+          <div>
+            <span>Próximo episódio</span>
+            <strong>Summer 2026</strong>
+          </div>
+          <div>
+            <span>Estado da missão</span>
+            <strong class="pulse">Em progresso</strong>
+          </div>
+        </div>
+      </div>
+      <div class="hero-badge">Capítulo III</div>
+    </header>
+
+    <main>
+      <section class="story" id="story">
+        <div class="story-card">
+          <p class="story-tag">Canápolis</p>
+          <h2>Nossa lore</h2>
+          <p>
+            Uma dupla com química cinematográfica, soundtrack própria e missões
+            improvisadas. Cada encontro virou print mental e agora tem lugar
+            oficial.
+          </p>
+        </div>
+        <div class="story-card">
+          <p class="story-tag">Cabana Ipê Roxo</p>
+          <ul>
+            <li>Love + pôr do sol pastel</li>
+            <li>Estética Hollyhood City</li>
+            <li>Cartela retrô + granulado</li>
+          </ul>
+          <div class="chip-row">
+            <span class="chip">♥ Diógenes</span>
+            <span class="chip">♥ Gabiely</span>
+            <span class="chip">Combo Perfeito</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="gallery" id="gallery">
+        <div class="section-header">
+          <p class="eyebrow">Capturas favoritas</p>
+          <h2>Galeria Vice</h2>
+        </div>
+        <div class="gallery-grid">
+          <figure
+            class="gallery-card"
+            data-type="image"
+            data-index="0"
+            data-src="assets/images/foto-love-risadas.jpeg"
+          >
+            <img
+              src="assets/images/foto-love-risadas.jpeg"
+              alt="Primeira missão: love + risadas"
+              loading="lazy"
+            />
+            <figcaption>Primeira missão: love + risadas.</figcaption>
+          </figure>
+          <figure
+            class="gallery-card"
+            data-type="image"
+            data-index="1"
+            data-src="assets/images/maos-dadas.jpeg"
+          >
+            <img
+              src="assets/images/maos-dadas.jpeg"
+              alt="Noite neon com mãos dadas"
+              loading="lazy"
+            />
+            <figcaption>Noite neon + mãos dadas.</figcaption>
+          </figure>
+          <figure
+            class="gallery-card gallery-card--video"
+            data-type="video"
+            data-index="2"
+            data-src="assets/images/roadtrip.mp4"
+          >
+            <video
+              src="assets/images/roadtrip.mp4"
+              autoplay
+              loop
+              playsinline
+            ></video>
+            <figcaption>Roadtrip sem destino.</figcaption>
+          </figure>
+          <figure
+            class="gallery-card"
+            data-type="image"
+            data-index="3"
+            data-src="assets/images/sunset.jpeg"
+          >
+            <img
+              src="assets/images/sunset.jpeg"
+              alt="Sunset beach"
+              loading="lazy"
+            />
+            <figcaption>sunset beach.</figcaption>
+          </figure>
+          <figure
+            class="gallery-card"
+            data-type="image"
+            data-index="4"
+            data-src="assets/images/dancas.jpeg"
+          >
+            <img
+              src="assets/images/dancas.jpeg"
+              alt="Show neon com dança sincronizada"
+              loading="lazy"
+            />
+            <figcaption>Show neon com dança sincronizada.</figcaption>
+          </figure>
+          <figure
+            class="gallery-card"
+            data-type="image"
+            data-index="5"
+            data-src="assets/images/domingo_preguica.jpeg"
+          >
+            <img
+              src="assets/images/domingo_preguica.jpeg"
+              alt="Domingo preguiçoso com playlist"
+              loading="lazy"
+            />
+            <figcaption>Domingo preguiçoso + playlist.</figcaption>
+          </figure>
+          <figure
+            class="gallery-card"
+            data-type="image"
+            data-index="6"
+            data-src="assets/images/longe_casa.jpeg"
+          >
+            <img
+              src="assets/images/longe_casa.jpeg"
+              alt="Noite neon longe de casa"
+              loading="lazy"
+            />
+            <figcaption>Noite Neon + longe de casa.</figcaption>
+          </figure>
+          <figure
+            class="gallery-card"
+            data-type="image"
+            data-index="7"
+            data-src="assets/images/natal.jpeg"
+          >
+            <img
+              src="assets/images/natal.jpeg"
+              alt="Natal e melhor viagem"
+              loading="lazy"
+            />
+            <figcaption>Natal + Best Trip.</figcaption>
+          </figure>
+          <figure
+            class="gallery-card"
+            data-type="image"
+            data-index="8"
+            data-src="assets/images/perfect.jpeg"
+          >
+            <img
+              src="assets/images/perfect.jpeg"
+              alt="Perfect Pumping"
+              loading="lazy"
+            />
+            <figcaption>Perfect Pumping.</figcaption>
+          </figure>
+          <figure
+            class="gallery-card"
+            data-type="image"
+            data-index="9"
+            data-src="assets/images/folego.jpeg"
+          >
+            <img
+              src="assets/images/folego.jpeg"
+              alt="Sem palavras"
+              loading="lazy"
+            />
+            <figcaption>Sem Palavras.</figcaption>
+          </figure>
+          <figure
+            class="gallery-card"
+            data-type="image"
+            data-index="10"
+            data-src="assets/images/gringo.jpeg"
+          >
+            <img
+              src="assets/images/gringo.jpeg"
+              alt="The Foreign Couple"
+              loading="lazy"
+            />
+            <figcaption>The Foreign Couple.</figcaption>
+          </figure>
+          <figure
+            class="gallery-card gallery-card--video"
+            data-type="video"
+            data-index="11"
+            data-src="assets/images/drink.mp4"
+          >
+            <video
+              src="assets/images/drink.mp4"
+              autoplay
+              loop
+              playsinline
+            ></video>
+            <figcaption>Noite Neon + Drink.</figcaption>
+          </figure>
+          <figure
+            class="gallery-card"
+            data-type="image"
+            data-index="12"
+            data-src="assets/images/noite_show.jpeg"
+          >
+            <img
+              src="assets/images/noite_show.jpeg"
+              alt="Noite neon com sertanejo"
+              loading="lazy"
+            />
+            <figcaption>Noite Neon + Sertanejo.</figcaption>
+          </figure>
+          <figure
+            class="gallery-card"
+            data-type="image"
+            data-index="13"
+            data-src="assets/images/company.jpeg"
+          >
+            <img
+              src="assets/images/company.jpeg"
+              alt="Best Company"
+              loading="lazy"
+            />
+            <figcaption>Best Company.</figcaption>
+          </figure>
+          <figure
+            class="gallery-card"
+            data-type="image"
+            data-index="14"
+            data-src="assets/images/perfectcasal.jpeg"
+          >
+            <img
+              src="assets/images/perfectcasal.jpeg"
+              alt="O casal perfeito"
+              loading="lazy"
+            />
+            <figcaption>O Casal Perfeito.</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="timeline" id="timeline">
+        <div class="section-header">
+          <p class="eyebrow">Linha do tempo</p>
+          <h2>Memórias desbloqueadas</h2>
+        </div>
+        <ol class="timeline-list">
+          <li class="timeline-item">
+            <span class="timeline-date">2023</span>
+            <h3>Tutorial + bug risadas</h3>
+            <p>Nosso primeiro encontro improvisado virou cena pós-créditos.</p>
+          </li>
+          <li class="timeline-item">
+            <span class="timeline-date">2024</span>
+            <h3>Modo campanha</h3>
+            <p>Viagens curtas, playlists longas e muitas fotos.</p>
+          </li>
+          <li class="timeline-item">
+            <span class="timeline-date">2025</span>
+            <h3>DLC Amor Intenso</h3>
+            <p>Planos maiores, apartamento com vista e sonhos sincronizados.</p>
+          </li>
+          <li class="timeline-item">
+            <span class="timeline-date">2026</span>
+            <h3>Ano das Mudanças</h3>
+            <p>
+              Novos caminhos, hábitos alinhados e o coração decidido a buscar
+              mais de Deus em cada missão.
+            </p>
+          </li>
+        </ol>
+      </section>
+
+      <section class="mixtape">
+        <div class="section-header">
+          <p class="eyebrow">Extras colecionáveis</p>
+          <h2>Itens que não podem faltar</h2>
+        </div>
+        <div class="card-grid">
+          <article>
+            <h3>Playlist oficial</h3>
+            <p>Lo-fi de madrugada, funk de festa, pop dançante na estrada.</p>
+          </article>
+          <article>
+            <h3>Câmera descartável</h3>
+            <p>
+              Granulado perfeito para deixar qualquer beijo com cara de cinema.
+            </p>
+          </article>
+          <article>
+            <h3>Mapa secreto</h3>
+            <p>
+              Lista de lugares que ainda vamos invadir juntos. Spoiler: praias e
+              diners clássicos.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="cta" id="rsvp">
+        <div>
+          <p class="eyebrow">Próximo episódio</p>
+          <h2>Reserva de missão</h2>
+          <p>Escolha a data, junta o outfit e aperta start.</p>
+        </div>
+        <form class="cta-form" data-whatsapp-form>
+          <label>
+            Data ideal
+            <input type="date" name="date" />
+          </label>
+          <label>
+            Local dos sonhos
+            <input
+              type="text"
+              name="place"
+              placeholder="Ex: Pôr do sol na praia"
+            />
+          </label>
+          <label>
+            Mood da noite
+            <select name="mood">
+              <option>Noite neon</option>
+              <option>Roadtrip</option>
+              <option>Cinema + pipoca</option>
+            </select>
+          </label>
+          <button type="submit">Agendar missão</button>
+        </form>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div>
+        <span class="badge">Vice Love Stories</span>
+        <p>Feito com carinho em 2025.</p>
+      </div>
+      <p class="footer-copy">Pressione play para reviver tudo outra vez.</p>
+    </footer>
+
+    <div class="lightbox" id="lightbox">
+      <button class="lightbox-close" aria-label="Fechar">×</button>
+      <button class="lightbox-prev" aria-label="Anterior">‹</button>
+      <div class="lightbox-content">
+        <img class="lightbox-image" alt="" />
+        <video class="lightbox-video" controls playsinline></video>
+        <p class="lightbox-caption"></p>
+      </div>
+      <button class="lightbox-next" aria-label="Próximo">›</button>
+    </div>
+
+    <script src="script.js" defer></script>
+  </body>
+</html>
