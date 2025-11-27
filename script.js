@@ -89,8 +89,6 @@ galleryImages.forEach((image) => {
   image.addEventListener("error", handleMediaLoad);
 });
 
-const sfxButton = document.querySelector("[data-sfx]");
-const body = document.body;
 const letterModal = document.getElementById("letter-modal");
 const letterTrigger = document.querySelector("[data-letter-trigger]");
 const letterDismissControls = document.querySelectorAll(
@@ -105,15 +103,6 @@ const videoTrigger = document.querySelector("[data-video-trigger]");
 const videoDismissControls = document.querySelectorAll("[data-video-dismiss]");
 const videoPlayer = document.querySelector(".video-player");
 const startMissionButton = document.querySelector("[data-start-mission]");
-
-if (sfxButton) {
-  sfxButton.addEventListener("click", () => {
-    body.classList.toggle("is-vibing");
-    sfxButton.textContent = body.classList.contains("is-vibing")
-      ? "Stop Vibe"
-      : "Play Vibe";
-  });
-}
 
 const openLetterModal = () => {
   if (!letterModal) return;
@@ -267,6 +256,7 @@ const prevBtn = document.querySelector(".lightbox-prev");
 const nextBtn = document.querySelector(".lightbox-next");
 const galleryCards = document.querySelectorAll(".gallery-card[data-index]");
 const timelineSection = document.getElementById("timeline");
+const galleryFooter = document.querySelector(".gallery-footer");
 
 let currentIndex = 0;
 const totalItems = galleryCards.length;
@@ -331,7 +321,10 @@ const showNext = () => {
   const isLastItem = currentIndex === totalItems - 1;
   if (isLastItem) {
     closeLightbox();
-    timelineSection?.scrollIntoView({ behavior: "smooth", block: "start" });
+    (galleryFooter || timelineSection)?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
     return;
   }
 
