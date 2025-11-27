@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vice Love Stories</title>
+    <title>True Love Stories</title>
     <meta
       name="description"
       content="Landing page inspirada em GTA para guardar fotos e memórias com meu amor."
@@ -19,7 +19,7 @@
   <body>
     <div class="loader" id="loader">
       <div class="loader-content">
-        <h2 class="loader-title">Vice <span>Love</span> Stories</h2>
+        <h2 class="loader-title">True <span>Love</span> Stories</h2>
         <div class="loader-bar">
           <div class="loader-progress"></div>
         </div>
@@ -28,7 +28,7 @@
     </div>
     <header class="hero" id="home">
       <nav class="nav">
-        <div class="brand">Vice <span>Love</span></div>
+        <div class="brand">True <span>Love</span></div>
         <div class="nav-links">
           <a href="#story">História</a>
           <a href="#gallery">Galeria</a>
@@ -408,7 +408,7 @@
 
     <footer class="footer">
       <div>
-        <span class="badge">Vice Love Stories</span>
+        <span class="badge">True Love Stories</span>
         <p>Feito com carinho em 2025.</p>
       </div>
       <p class="footer-copy">Pressione play para reviver tudo outra vez.</p>
@@ -472,7 +472,7 @@
         >
           ×
         </button>
-        <p class="video-eyebrow">Cena favorita</p>
+        <p class="video-eyebrow">Cenas favoritas</p>
         <h3>Nosso trailer tropical</h3>
         <video
           class="video-player"
@@ -483,10 +483,40 @@
       </div>
     </div>
 
-    <audio id="letter-audio" preload="auto">
-      <source src="assets/audio/carta.mp3" type="audio/mpeg" />
-      Seu navegador não suporta áudio HTML5.
-    </audio>
+    <div class="audio-modal" id="audio-modal" aria-hidden="true">
+      <div class="audio-backdrop" data-audio-dismiss></div>
+      <div class="audio-dialog" role="dialog" aria-modal="true">
+        <button
+          class="audio-close"
+          aria-label="Fechar mensagens"
+          data-audio-dismiss
+        >
+          ×
+        </button>
+        <p class="audio-eyebrow">Mensagens de voz</p>
+        <h3>Você é o amor da minha vida!</h3>
+        <div class="audio-list">
+          <article class="audio-card">
+            <p class="audio-label">Mensagem 01</p>
+            <audio
+              class="audio-player"
+              controls
+              preload="none"
+              src="assets/images/mensagem01.mp4"
+            ></audio>
+          </article>
+          <article class="audio-card">
+            <p class="audio-label">Mensagem 02</p>
+            <audio
+              class="audio-player"
+              controls
+              preload="none"
+              src="assets/images/mensagem02.mp4"
+            ></audio>
+          </article>
+        </div>
+      </div>
+    </div>
 
     <script src="script.js" defer></script>
   </body>

@@ -96,8 +96,10 @@ const letterTrigger = document.querySelector("[data-letter-trigger]");
 const letterDismissControls = document.querySelectorAll(
   "[data-letter-dismiss]"
 );
-const letterAudio = document.getElementById("letter-audio");
+const audioModal = document.getElementById("audio-modal");
 const audioTrigger = document.querySelector("[data-audio-trigger]");
+const audioDismissControls = document.querySelectorAll("[data-audio-dismiss]");
+const audioPlayers = document.querySelectorAll(".audio-player");
 const videoModal = document.getElementById("video-modal");
 const videoTrigger = document.querySelector("[data-video-trigger]");
 const videoDismissControls = document.querySelectorAll("[data-video-dismiss]");
@@ -163,6 +165,32 @@ videoDismissControls.forEach((control) =>
   control.addEventListener("click", closeVideoModal)
 );
 
+const openAudioModal = () => {
+  if (!audioModal) return;
+  audioModal.classList.add("active");
+  audioModal.setAttribute("aria-hidden", "false");
+  document.body.style.overflow = "hidden";
+};
+
+const closeAudioModal = () => {
+  if (!audioModal) return;
+  audioModal.classList.remove("active");
+  audioModal.setAttribute("aria-hidden", "true");
+  document.body.style.overflow = "";
+  audioPlayers.forEach((player) => {
+    player.pause();
+    player.currentTime = 0;
+  });
+};
+
+if (audioTrigger) {
+  audioTrigger.addEventListener("click", openAudioModal);
+}
+
+audioDismissControls.forEach((control) =>
+  control.addEventListener("click", closeAudioModal)
+);
+
 document.addEventListener("keydown", (event) => {
   if (event.key === "Escape" && letterModal?.classList.contains("active")) {
     closeLetterModal();
@@ -170,33 +198,9 @@ document.addEventListener("keydown", (event) => {
   if (event.key === "Escape" && videoModal?.classList.contains("active")) {
     closeVideoModal();
   }
-});
-
-const toggleAudioPlayback = async () => {
-  if (!letterAudio || !audioTrigger) return;
-
-  try {
-    if (letterAudio.paused) {
-      await letterAudio.play();
-      audioTrigger.classList.add("is-playing");
-      audioTrigger.textContent = "Pausar mensagem";
-    } else {
-      letterAudio.pause();
-      audioTrigger.classList.remove("is-playing");
-      audioTrigger.textContent = "Ouvir mensagem";
-    }
-  } catch (error) {
-    console.error("Falha ao tocar áudio", error);
+  if (event.key === "Escape" && audioModal?.classList.contains("active")) {
+    closeAudioModal();
   }
-};
-
-if (audioTrigger) {
-  audioTrigger.addEventListener("click", toggleAudioPlayback);
-}
-
-letterAudio?.addEventListener("ended", () => {
-  audioTrigger?.classList.remove("is-playing");
-  if (audioTrigger) audioTrigger.textContent = "Ouvir mensagem";
 });
 
 const footerYearContainer = document.querySelector(".footer-copy");
