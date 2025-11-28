@@ -350,12 +350,25 @@ timelineItems.forEach((item, index) => {
 });
 
 const timelineUnlockButton = document.querySelector("[data-timeline-unlock]");
+const secondChanceButton = document.querySelector("[data-second-chance]");
 
 if (timelineUnlockButton) {
   timelineUnlockButton.addEventListener("click", () => {
     const phone = "5534998982511";
     const message =
       "Oi! Quero desbloquear nossa missão 2026. Bora planejar esse próximo capítulo?";
+    const whatsappURL = `https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(
+      message
+    )}`;
+    window.open(whatsappURL, "_blank");
+  });
+}
+
+if (secondChanceButton) {
+  secondChanceButton.addEventListener("click", () => {
+    const phone = "5534998982511";
+    const message =
+      "Amor, me dá uma nova chance? Quero recomeçar com calma, assumir meus erros e te provar diariamente que posso ser alguém melhor.";
     const whatsappURL = `https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(
       message
     )}`;
