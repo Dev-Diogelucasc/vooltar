@@ -287,14 +287,14 @@ const detachLoaderAudioUnlock = () => {
 };
 
 const handleLoaderAudioUnlock = () => {
-  ensureLoaderAudioContext();
+  const context = ensureLoaderAudioContext();
   if (loaderPulsePending) {
     const played = playLoaderSoundPulse();
     if (played) {
       loaderPulsePending = false;
       detachLoaderAudioUnlock();
     }
-  } else {
+  } else if (context) {
     detachLoaderAudioUnlock();
   }
 };
