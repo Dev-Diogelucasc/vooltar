@@ -269,6 +269,40 @@ const triggerLightboxAnimation = (element) => {
   element.classList.add("is-animating");
 };
 
+const getMemoryLabel = (index) => {
+  const card = galleryCards[index];
+  if (!card) return "Memória";
+  return (
+    card.dataset.caption ||
+    card.querySelector("figcaption")?.textContent?.trim() ||
+    "Memória"
+  );
+};
+
+const updateLightboxNavLabels = () => {
+  if (nextBtn) {
+    if (currentIndex === totalItems - 1) {
+      nextBtn.setAttribute("aria-label", "Ir para a linha do tempo");
+    } else {
+      nextBtn.setAttribute(
+        "aria-label",
+        `Ver próxima memória: ${getMemoryLabel(currentIndex + 1)}`
+      );
+    }
+  }
+
+  if (prevBtn) {
+    if (currentIndex === 0) {
+      prevBtn.setAttribute("aria-label", "Voltar para última memória");
+    } else {
+      prevBtn.setAttribute(
+        "aria-label",
+        `Ver memória anterior: ${getMemoryLabel(currentIndex - 1)}`
+      );
+    }
+  }
+};
+
 const openLightbox = (index) => {
   currentIndex = index;
   const card = galleryCards[index];
@@ -309,6 +343,7 @@ const openLightbox = (index) => {
   document.body.style.overflow = "hidden";
   triggerLightboxAnimation(lightboxMedia);
   triggerLightboxAnimation(lightboxCaptionCard);
+  updateLightboxNavLabels();
 };
 
 const closeLightbox = () => {
