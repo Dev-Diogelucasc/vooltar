@@ -79,6 +79,16 @@ window.addEventListener("resize", debouncedMasonry);
 const galleryVideos = document.querySelectorAll(".gallery-card video");
 const galleryImages = document.querySelectorAll(".gallery-card img");
 
+const motionPreferenceMediaQuery =
+  typeof window.matchMedia === "function"
+    ? window.matchMedia("(prefers-reduced-motion: reduce)")
+    : null;
+let prefersReducedMotion = motionPreferenceMediaQuery?.matches ?? false;
+
+motionPreferenceMediaQuery?.addEventListener("change", (event) => {
+  prefersReducedMotion = event.matches;
+});
+
 const handleMediaLoad = () => {
   requestAnimationFrame(applyMasonryLayout);
 };
@@ -218,15 +228,103 @@ if (footerYearValue) {
 // Loading screen
 const loader = document.getElementById("loader");
 const heroSection = document.getElementById("home");
-window.addEventListener("load", () => {
-  setTimeout(() => {
-    if (heroSection) {
-      heroSection.scrollIntoView({ behavior: "auto", block: "start" });
-    } else {
-      window.scrollTo({ top: 0, behavior: "auto" });
+const loaderSonic = document.querySelector(".loader-sonic");
+let loaderAudioContext = null;
+let loaderPulsePending = false;
+
+const ensureLoaderAudioContext = () => {
+  if (prefersReducedMotion) return null;
+  const AudioCtx = window.AudioContext || window.webkitAudioContext;
+  if (!AudioCtx) return null;
+  if (!loaderAudioContext) {
+    try {
+      loaderAudioContext = new AudioCtx();
+    } catch (error) {
+      console.warn("Não foi possível iniciar o áudio do loader", error);
+      loaderAudioContext = null;
+      return null;
     }
-    loader.classList.add("hidden");
-  }, 4000);
+  }
+
+  if (typeof loaderAudioContext.resume === "function") {
+    loaderAudioContext.resume().catch(() => {});
+  }
+
+  return loaderAudioContext;
+};
+
+const playLoaderSoundPulse = () => {
+  if (prefersReducedMotion) return false;
+  const context = ensureLoaderAudioContext();
+  if (!context) return false;
+
+  const oscillator = context.createOscillator();
+  const gainNode = context.createGain();
+  const now = context.currentTime;
+
+  oscillator.type = "triangle";
+  oscillator.frequency.setValueAtTime(420, now);
+  oscillator.frequency.exponentialRampToValueAtTime(160, now + 1.1);
+  gainNode.gain.setValueAtTime(0.0001, now);
+  gainNode.gain.exponentialRampToValueAtTime(0.16, now + 0.15);
+  gainNode.gain.exponentialRampToValueAtTime(0.001, now + 1.2);
+
+  oscillator.connect(gainNode);
+  gainNode.connect(context.destination);
+
+  oscillator.start(now);
+  oscillator.stop(now + 1.3);
+
+  loaderSonic?.classList.add("is-pulsing");
+  setTimeout(() => loaderSonic?.classList.remove("is-pulsing"), 1500);
+
+  return true;
+};
+
+const detachLoaderAudioUnlock = () => {
+  document.removeEventListener("pointerdown", handleLoaderAudioUnlock);
+  document.removeEventListener("keydown", handleLoaderAudioUnlock);
+};
+
+const handleLoaderAudioUnlock = () => {
+  ensureLoaderAudioContext();
+  if (loaderPulsePending) {
+    const played = playLoaderSoundPulse();
+    if (played) {
+      loaderPulsePending = false;
+      detachLoaderAudioUnlock();
+    }
+  } else {
+    detachLoaderAudioUnlock();
+  }
+};
+
+if (!prefersReducedMotion) {
+  document.addEventListener("pointerdown", handleLoaderAudioUnlock);
+  document.addEventListener("keydown", handleLoaderAudioUnlock);
+}
+
+const attemptLoaderPulse = () => {
+  if (prefersReducedMotion) return;
+  const played = playLoaderSoundPulse();
+  loaderPulsePending = !played;
+  if (!loaderPulsePending) {
+    detachLoaderAudioUnlock();
+  }
+};
+
+const finishLoaderSequence = () => {
+  if (heroSection) {
+    heroSection.scrollIntoView({ behavior: "auto", block: "start" });
+  } else {
+    window.scrollTo({ top: 0, behavior: "auto" });
+  }
+  loader?.classList.add("hidden");
+  attemptLoaderPulse();
+};
+
+window.addEventListener("load", () => {
+  setTimeout(finishLoaderSequence, 4000);
 });
 
 // Timeline scroll reveal
@@ -469,11 +567,6 @@ const missionPlanDestination = document.querySelector(
 );
 const missionMapActivePanel = document.querySelector(".mission-map-active");
 const missionMapCanvas = document.querySelector(".mission-map-canvas");
-const prefersReducedMotionQuery =
-  typeof window.matchMedia === "function"
-    ? window.matchMedia("(prefers-reduced-motion: reduce)")
-    : null;
-const prefersReducedMotion = prefersReducedMotionQuery?.matches ?? false;
 let missionActivePin = null;
 let missionAudioContext = null;
 const missionWhatsappPhone = "5534998982511";
