@@ -403,6 +403,95 @@
         </ol>
       </section>
 
+      <section class="mission-map" id="mapa">
+        <div class="section-header mission-map__header">
+          <p class="eyebrow">Nova rota</p>
+          <h2>Mapa das missões</h2>
+          <p>
+            Um radar neon para acompanhar nossa base atual, as viagens que
+            marcaram a história e os destinos que ainda vamos desbloquear.
+          </p>
+        </div>
+
+        <div class="mission-map-content">
+          <article class="mission-map-briefing">
+            <p class="mission-map-briefing__eyebrow">briefing atual</p>
+            <h3>Onde estamos e para onde vamos</h3>
+            <p class="mission-map-briefing__copy">
+              Toque nos pins para atualizar o painel e planejar o próximo
+              capítulo da campanha.
+            </p>
+            <div class="mission-map-active" aria-live="polite">
+              <p class="mission-map-active__type" data-map-active-type>
+                Base confirmada
+              </p>
+              <h4 data-map-active-title>Cabana Ipê Roxo</h4>
+              <p data-map-active-description>
+                Refúgio cinematográfico entre árvores roxas, cenário perfeito
+                para alinhar planos, playlists e luzinhas penduradas.
+              </p>
+            </div>
+            <ul class="mission-map-legends">
+              <li><span class="legend-dot is-base"></span> Base confirmada</li>
+              <li>
+                <span class="legend-dot is-memory"></span> Memória que já virou
+                história
+              </li>
+              <li>
+                <span class="legend-dot is-future"></span> Destino em fase de
+                planejamento
+              </li>
+            </ul>
+          </article>
+
+          <div class="mission-map-canvas">
+            <div class="mission-map-grid"></div>
+            <div class="mission-map-orbit"></div>
+            <button
+              class="mission-pin is-base"
+              style="--x: 42%; --y: 38%"
+              data-pin
+              data-pin-type="Base confirmada"
+              data-pin-title="Cabana Ipê Roxo"
+              data-pin-description="Quartel-general com varal de luzes, lareira improvisada e amor em looping."
+            >
+              <span>Cabana</span>
+            </button>
+            <button
+              class="mission-pin is-future"
+              style="--x: 68%; --y: 62%"
+              data-pin
+              data-pin-type="Destino em planejamento"
+              data-pin-title="Natal, RN"
+              data-pin-description="Checkpoint litorâneo aguardando confirmação. Já sentimos o cheiro de mar + água de coco."
+            >
+              <span>Natal</span>
+            </button>
+            <button
+              class="mission-pin is-memory"
+              style="--x: 52%; --y: 20%"
+              data-pin
+              data-pin-type="Checkpoint desbloqueado"
+              data-pin-title="Natal iluminado"
+              data-pin-description="A viagem que redefiniu saudade. Agora todo destino precisa ter a sua mão."
+            >
+              <span>Natal Trip</span>
+            </button>
+
+            <button
+              class="mission-pin is-future"
+              style="--x: 15%; --y: 32%"
+              data-pin
+              data-pin-type="Objetivo secreto"
+              data-pin-title="Refúgio europeu"
+              data-pin-description="Passaporte pronto, câmera carregada e muita fé no que Deus prepara pra gente."
+            >
+              <span>Europa</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
       <section class="mixtape">
         <div class="section-header">
           <p class="eyebrow">Extras colecionáveis</p>

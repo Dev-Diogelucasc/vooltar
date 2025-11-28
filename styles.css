@@ -1274,6 +1274,265 @@ main {
   margin: 0.4rem 0;
 }
 
+.mission-map {
+  margin-top: 4rem;
+  padding: 3rem clamp(1.5rem, 6vw, 4rem);
+  border: 1px solid var(--stroke);
+  border-radius: 1.8rem;
+  background: linear-gradient(140deg, rgba(255, 77, 154, 0.12), transparent 60%),
+    rgba(10, 2, 20, 0.55);
+  box-shadow: 0 40px 90px rgba(0, 0, 0, 0.45);
+}
+
+.mission-map__header p {
+  max-width: 520px;
+}
+
+.mission-map-content {
+  margin-top: 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.8rem;
+  align-items: stretch;
+}
+
+.mission-map-briefing {
+  background: rgba(5, 0, 15, 0.65);
+  border: 1px solid var(--stroke);
+  border-radius: 1.5rem;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.mission-map-briefing__eyebrow {
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+.mission-map-briefing h3 {
+  font-size: 1.6rem;
+  text-transform: uppercase;
+}
+
+.mission-map-briefing__copy {
+  color: var(--muted);
+}
+
+.mission-map-active {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 1.25rem;
+  padding: 1.25rem 1.5rem;
+  background: rgba(255, 255, 255, 0.02);
+  min-height: 180px;
+}
+
+.mission-map-active__type {
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  font-size: 0.75rem;
+  color: var(--accent-2);
+  margin-bottom: 0.5rem;
+}
+
+.mission-map-active h4 {
+  font-size: 1.4rem;
+  margin-bottom: 0.5rem;
+}
+
+.mission-map-legends {
+  list-style: none;
+  display: grid;
+  gap: 0.4rem;
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+
+.legend-dot {
+  width: 0.8rem;
+  height: 0.8rem;
+  border-radius: 50%;
+  display: inline-flex;
+  margin-right: 0.5rem;
+  box-shadow: 0 0 12px currentColor;
+}
+
+.legend-dot.is-base {
+  color: var(--accent-2);
+  background: var(--accent-2);
+}
+
+.legend-dot.is-memory {
+  color: var(--accent);
+  background: var(--accent);
+}
+
+.legend-dot.is-future {
+  color: #7ef5ff;
+  background: #7ef5ff;
+}
+
+.mission-map-canvas {
+  position: relative;
+  min-height: 380px;
+  border-radius: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: radial-gradient(circle at 20% 30%, rgba(255, 179, 71, 0.25), transparent 55%),
+    radial-gradient(circle at 80% 70%, rgba(126, 245, 255, 0.25), transparent 60%),
+    rgba(5, 0, 15, 0.85);
+  overflow: hidden;
+}
+
+.mission-map-grid,
+.mission-map-orbit {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.mission-map-grid {
+  background-image: linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+  background-size: 80px 80px;
+  opacity: 0.25;
+}
+
+.mission-map-orbit {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  width: 60%;
+  height: 60%;
+  margin: auto;
+  border-radius: 50%;
+  animation: orbitGlow 8s linear infinite;
+}
+
+.mission-pin {
+  --x: 50%;
+  --y: 50%;
+  position: absolute;
+  left: calc(var(--x) - 20px);
+  top: calc(var(--y) - 20px);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  background: rgba(5, 0, 15, 0.85);
+  color: var(--text);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.45);
+}
+
+.mission-pin span {
+  pointer-events: none;
+}
+
+.mission-pin::before {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 1px solid currentColor;
+  opacity: 0.5;
+  animation: pinPulse 2.8s ease-out infinite;
+}
+
+.mission-pin.is-base {
+  color: var(--accent-2);
+}
+
+.mission-pin.is-memory {
+  color: var(--accent);
+}
+
+.mission-pin.is-future {
+  color: #7ef5ff;
+}
+
+.mission-pin:hover,
+.mission-pin:focus-visible,
+.mission-pin.is-active {
+  transform: scale(1.15);
+  box-shadow: 0 0 20px currentColor;
+}
+
+.mission-pin:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+
+.mission-pin::after {
+  content: attr(data-pin-title);
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  padding: 0.35rem 0.6rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(5, 0, 15, 0.85);
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.mission-pin:hover::after,
+.mission-pin:focus-visible::after {
+  opacity: 1;
+  transform: translate(-50%, -4px);
+}
+
+@keyframes pinPulse {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.4;
+  }
+  70% {
+    transform: scale(1.4);
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes orbitGlow {
+  0% {
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(255, 255, 255, 0.15);
+  }
+  100% {
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
+  }
+}
+
+@media (max-width: 720px) {
+  .mission-map {
+    padding: 2.5rem 1.5rem;
+  }
+  .mission-map-content {
+    grid-template-columns: 1fr;
+  }
+  .mission-map-canvas {
+    min-height: 320px;
+  }
+}
+
 .mixtape .card-grid {
   margin-top: 1.5rem;
   display: grid;
@@ -1761,5 +2020,14 @@ main {
   .hero-badge {
     position: static;
     margin-top: 2rem;
+  }
+}
+
+@media (max-width: 540px) {
+  .audio-dialog,
+  .video-dialog {
+    width: 94vw;
+    padding: 1.6rem 1.25rem 1.25rem;
+    border-radius: 1rem;
   }
 }

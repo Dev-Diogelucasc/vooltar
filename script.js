@@ -455,3 +455,36 @@ if (whatsappForm) {
     window.open(whatsappURL, "_blank");
   });
 }
+
+// Mission map interactions
+const missionPins = document.querySelectorAll("[data-pin]");
+const missionActiveType = document.querySelector("[data-map-active-type]");
+const missionActiveTitle = document.querySelector("[data-map-active-title]");
+const missionActiveDescription = document.querySelector(
+  "[data-map-active-description]"
+);
+
+const updateMissionPanel = (pin) => {
+  if (!missionActiveType || !missionActiveTitle || !missionActiveDescription)
+    return;
+  if (!pin) return;
+  missionActiveType.textContent = pin.dataset.pinType || "Missão";
+  missionActiveTitle.textContent = pin.dataset.pinTitle || "Destino";
+  missionActiveDescription.textContent =
+    pin.dataset.pinDescription || "Detalhes confidenciais em breve.";
+  missionPins.forEach((missionPin) => {
+    missionPin.classList.toggle("is-active", missionPin === pin);
+  });
+};
+
+if (missionPins.length && missionActiveType && missionActiveTitle) {
+  missionPins.forEach((pin) => {
+    pin.setAttribute("type", "button");
+    pin.setAttribute("tabindex", "0");
+    pin.addEventListener("mouseenter", () => updateMissionPanel(pin));
+    pin.addEventListener("focus", () => updateMissionPanel(pin));
+    pin.addEventListener("click", () => updateMissionPanel(pin));
+  });
+
+  updateMissionPanel(missionPins[0]);
+}
