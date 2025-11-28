@@ -312,6 +312,7 @@ const openLightbox = (index) => {
 };
 
 const closeLightbox = () => {
+  isTransitioning = true;
   lightbox.classList.remove("active");
   document.body.style.overflow = "";
   lightboxVideo.pause();
@@ -320,6 +321,9 @@ const closeLightbox = () => {
   [lightboxMedia, lightboxCaptionCard].forEach((element) =>
     element?.classList.remove("is-animating")
   );
+  setTimeout(() => {
+    isTransitioning = false;
+  }, 500);
 };
 
 const showNext = () => {
@@ -357,7 +361,10 @@ const showPrev = () => {
 };
 
 galleryCards.forEach((card, index) => {
-  card.addEventListener("click", () => openLightbox(index));
+  card.addEventListener("click", () => {
+    if (isTransitioning) return;
+    openLightbox(index);
+  });
 });
 
 closeBtn.addEventListener("click", closeLightbox);
