@@ -278,6 +278,13 @@ const openLightbox = (index) => {
   const labelText =
     card.querySelector("figcaption")?.textContent?.trim() || "Cena favorita";
 
+  // Limpar mídia anterior antes de carregar nova
+  lightboxVideo.pause();
+  lightboxVideo.src = "";
+  lightboxImage.src = "";
+  lightboxVideo.classList.remove("active");
+  lightboxImage.classList.remove("active");
+
   lightboxCaption.textContent = caption;
   if (lightboxCaptionLabel) {
     lightboxCaptionLabel.textContent = labelText;
@@ -286,7 +293,6 @@ const openLightbox = (index) => {
   if (isVideo) {
     lightboxVideo.src = src;
     lightboxVideo.classList.add("active");
-    lightboxImage.classList.remove("active");
     lightboxVideo
       .play()
       .catch((error) =>
@@ -296,8 +302,6 @@ const openLightbox = (index) => {
     lightboxImage.src = src;
     lightboxImage.alt = caption;
     lightboxImage.classList.add("active");
-    lightboxVideo.classList.remove("active");
-    lightboxVideo.pause();
   }
 
   lightbox.classList.add("active");
