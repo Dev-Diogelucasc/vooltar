@@ -368,7 +368,8 @@ const showNext = () => {
   if (isLastItem) {
     closeLightbox();
     setTimeout(() => {
-      (galleryFooter || timelineSection)?.scrollIntoView({
+      // Prefer moving the user into the timeline section after the gallery tour
+      (timelineSection || galleryFooter)?.scrollIntoView({
         behavior: "smooth",
         block: "start",
       });
