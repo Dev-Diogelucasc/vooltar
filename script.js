@@ -488,7 +488,9 @@ const buildMissionMessage = (pin) => {
   if (!pin) return "Bora planejar nossa próxima missão?";
   return (
     pin.dataset.pinMessage ||
-    `Oi! Bora planejar nossa missão para ${pin.dataset.pinTitle || "esse destino"}?`
+    `Oi! Bora planejar nossa missão para ${
+      pin.dataset.pinTitle || "esse destino"
+    }?`
   );
 };
 
@@ -600,7 +602,9 @@ if (missionPins.length && missionActiveType && missionActiveTitle) {
     pin.setAttribute("tabindex", "0");
     pin.addEventListener("mouseenter", () => selectMissionPin(pin));
     pin.addEventListener("focus", () => selectMissionPin(pin));
-    pin.addEventListener("click", () => selectMissionPin(pin, { playTone: true }));
+    pin.addEventListener("click", () =>
+      selectMissionPin(pin, { playTone: true })
+    );
     pin.addEventListener("keydown", (event) => {
       if (event.key === "Enter" || event.key === " ") {
         event.preventDefault();
