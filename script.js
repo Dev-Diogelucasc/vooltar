@@ -260,6 +260,7 @@ const galleryFooter = document.querySelector(".gallery-footer");
 
 let currentIndex = 0;
 const totalItems = galleryCards.length;
+let isTransitioning = false;
 
 const triggerLightboxAnimation = (element) => {
   if (!element) return;
@@ -322,23 +323,37 @@ const closeLightbox = () => {
 };
 
 const showNext = () => {
+  if (isTransitioning) return;
+
   const isLastItem = currentIndex === totalItems - 1;
   if (isLastItem) {
     closeLightbox();
-    (galleryFooter || timelineSection)?.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-    });
+    setTimeout(() => {
+      (galleryFooter || timelineSection)?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }, 100);
     return;
   }
 
+  isTransitioning = true;
   currentIndex = Math.min(currentIndex + 1, totalItems - 1);
   openLightbox(currentIndex);
+  setTimeout(() => {
+    isTransitioning = false;
+  }, 300);
 };
 
 const showPrev = () => {
+  if (isTransitioning) return;
+
+  isTransitioning = true;
   currentIndex = (currentIndex - 1 + totalItems) % totalItems;
   openLightbox(currentIndex);
+  setTimeout(() => {
+    isTransitioning = false;
+  }, 300);
 };
 
 galleryCards.forEach((card, index) => {
