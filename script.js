@@ -57,9 +57,17 @@ const applyMasonryLayout = () => {
   });
 };
 
+let lastKnownWidth = window.innerWidth;
+
 const debouncedMasonry = (() => {
   let timeout;
   return () => {
+    const currentWidth = window.innerWidth;
+    if (Math.abs(currentWidth - lastKnownWidth) < 1) {
+      // Ignore height-only resizes (mobile address bar show/hide) to avoid jumpy scroll
+      return;
+    }
+    lastKnownWidth = currentWidth;
     clearTimeout(timeout);
     timeout = setTimeout(applyMasonryLayout, 150);
   };
