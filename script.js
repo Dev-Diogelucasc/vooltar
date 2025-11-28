@@ -349,6 +349,20 @@ timelineItems.forEach((item, index) => {
   timelineObserver.observe(item);
 });
 
+const timelineUnlockButton = document.querySelector("[data-timeline-unlock]");
+
+if (timelineUnlockButton) {
+  timelineUnlockButton.addEventListener("click", () => {
+    const phone = "5534998982511";
+    const message =
+      "Oi! Quero desbloquear nossa missão 2026. Bora planejar esse próximo capítulo?";
+    const whatsappURL = `https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(
+      message
+    )}`;
+    window.open(whatsappURL, "_blank");
+  });
+}
+
 // Lightbox functionality
 const lightbox = document.getElementById("lightbox");
 const lightboxImage = document.querySelector(".lightbox-image");
@@ -388,7 +402,10 @@ const getMemoryLabel = (index) => {
 const updateLightboxNavLabels = () => {
   if (nextBtn) {
     if (currentIndex === totalItems - 1) {
-      nextBtn.setAttribute("aria-label", "Ir para a linha do tempo");
+      nextBtn.setAttribute(
+        "aria-label",
+        "Ir para a seção Terminou a galeria"
+      );
     } else {
       nextBtn.setAttribute(
         "aria-label",
@@ -474,8 +491,8 @@ const showNext = () => {
   if (isLastItem) {
     closeLightbox();
     setTimeout(() => {
-      // Prefer moving the user into the timeline section after the gallery tour
-      (timelineSection || galleryFooter)?.scrollIntoView({
+      // After the tour, guide the user to the "Terminou a galeria?" section
+      (galleryFooter || timelineSection)?.scrollIntoView({
         behavior: "smooth",
         block: "start",
       });
