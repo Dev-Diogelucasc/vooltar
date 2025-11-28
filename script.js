@@ -463,11 +463,83 @@ const missionActiveTitle = document.querySelector("[data-map-active-title]");
 const missionActiveDescription = document.querySelector(
   "[data-map-active-description]"
 );
+const missionPlanButton = document.querySelector("[data-map-plan]");
+const missionPlanDestination = document.querySelector(
+  "[data-map-plan-destination]"
+);
+const missionMapActivePanel = document.querySelector(".mission-map-active");
+const missionMapCanvas = document.querySelector(".mission-map-canvas");
+const prefersReducedMotionQuery =
+  typeof window.matchMedia === "function"
+    ? window.matchMedia("(prefers-reduced-motion: reduce)")
+    : null;
+const prefersReducedMotion = prefersReducedMotionQuery?.matches ?? false;
+let missionActivePin = null;
+let missionAudioContext = null;
+const missionWhatsappPhone = "5534998982511";
+
+const setMissionAccent = (pin) => {
+  if (!missionMapActivePanel || !pin) return;
+  const accent = pin.dataset.pinAccent || "var(--accent)";
+  missionMapActivePanel.style.setProperty("--mission-accent", accent);
+};
+
+const buildMissionMessage = (pin) => {
+  if (!pin) return "Bora planejar nossa próxima missão?";
+  return (
+    pin.dataset.pinMessage ||
+    `Oi! Bora planejar nossa missão para ${pin.dataset.pinTitle || "esse destino"}?`
+  );
+};
+
+const getPinTone = (pin) => {
+  if (!pin) return 480;
+  const tone = Number(pin.dataset.pinTone);
+  if (!Number.isNaN(tone) && tone > 0) {
+    return tone;
+  }
+  if (pin.classList.contains("is-base")) return 420;
+  if (pin.classList.contains("is-memory")) return 520;
+  return 640;
+};
+
+const playMissionTone = (pin) => {
+  const AudioCtx = window.AudioContext || window.webkitAudioContext;
+  if (!AudioCtx) return;
+  try {
+    missionAudioContext = missionAudioContext || new AudioCtx();
+  } catch (error) {
+    console.warn("Não foi possível iniciar o áudio ambiente", error);
+    missionAudioContext = null;
+    return;
+  }
+
+  if (!missionAudioContext) return;
+  if (missionAudioContext.state === "suspended") {
+    missionAudioContext.resume();
+  }
+
+  const oscillator = missionAudioContext.createOscillator();
+  const gainNode = missionAudioContext.createGain();
+  const now = missionAudioContext.currentTime;
+
+  oscillator.type = "sine";
+  oscillator.frequency.setValueAtTime(getPinTone(pin), now);
+  gainNode.gain.setValueAtTime(0.08, now);
+  gainNode.gain.exponentialRampToValueAtTime(0.001, now + 0.2);
+
+  oscillator.connect(gainNode);
+  gainNode.connect(missionAudioContext.destination);
+
+  oscillator.start(now);
+  oscillator.stop(now + 0.2);
+};
 
 const updateMissionPanel = (pin) => {
   if (!missionActiveType || !missionActiveTitle || !missionActiveDescription)
     return;
   if (!pin) return;
+  missionActivePin = pin;
   missionActiveType.textContent = pin.dataset.pinType || "Missão";
   missionActiveTitle.textContent = pin.dataset.pinTitle || "Destino";
   missionActiveDescription.textContent =
@@ -475,16 +547,77 @@ const updateMissionPanel = (pin) => {
   missionPins.forEach((missionPin) => {
     missionPin.classList.toggle("is-active", missionPin === pin);
   });
+  setMissionAccent(pin);
+  if (missionPlanDestination) {
+    missionPlanDestination.textContent =
+      pin.dataset.pinTitle || "Destino selecionado";
+  }
+  if (missionPlanButton) {
+    missionPlanButton.disabled = false;
+    missionPlanButton.setAttribute(
+      "aria-label",
+      `Planejar missão para ${pin.dataset.pinTitle || "o destino"}`
+    );
+  }
+};
+
+const handleMissionPlan = () => {
+  if (!missionActivePin) return;
+  const message = buildMissionMessage(missionActivePin);
+  const whatsappURL = `https://api.whatsapp.com/send?phone=${missionWhatsappPhone}&text=${encodeURIComponent(
+    message
+  )}`;
+  window.open(whatsappURL, "_blank");
+  playMissionTone(missionActivePin);
+};
+
+const selectMissionPin = (pin, { playTone = false } = {}) => {
+  updateMissionPanel(pin);
+  if (playTone) {
+    playMissionTone(pin);
+  }
+};
+
+const handleMapTilt = (event) => {
+  if (!missionMapCanvas) return;
+  if (prefersReducedMotion) return;
+  const rect = missionMapCanvas.getBoundingClientRect();
+  const relativeX = (event.clientX - rect.left) / rect.width - 0.5;
+  const relativeY = (event.clientY - rect.top) / rect.height - 0.5;
+  missionMapCanvas.style.setProperty("--tiltX", `${relativeX * 6}deg`);
+  missionMapCanvas.style.setProperty("--tiltY", `${-relativeY * 6}deg`);
+};
+
+const resetMapTilt = () => {
+  if (!missionMapCanvas) return;
+  missionMapCanvas.style.setProperty("--tiltX", "0deg");
+  missionMapCanvas.style.setProperty("--tiltY", "0deg");
 };
 
 if (missionPins.length && missionActiveType && missionActiveTitle) {
   missionPins.forEach((pin) => {
     pin.setAttribute("type", "button");
     pin.setAttribute("tabindex", "0");
-    pin.addEventListener("mouseenter", () => updateMissionPanel(pin));
-    pin.addEventListener("focus", () => updateMissionPanel(pin));
-    pin.addEventListener("click", () => updateMissionPanel(pin));
+    pin.addEventListener("mouseenter", () => selectMissionPin(pin));
+    pin.addEventListener("focus", () => selectMissionPin(pin));
+    pin.addEventListener("click", () => selectMissionPin(pin, { playTone: true }));
+    pin.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        selectMissionPin(pin, { playTone: true });
+      }
+    });
   });
 
-  updateMissionPanel(missionPins[0]);
+  selectMissionPin(missionPins[0]);
+}
+
+if (missionPlanButton) {
+  missionPlanButton.addEventListener("click", handleMissionPlan);
+}
+
+if (missionMapCanvas && !prefersReducedMotion) {
+  missionMapCanvas.addEventListener("pointermove", handleMapTilt);
+  missionMapCanvas.addEventListener("pointerleave", resetMapTilt);
+  missionMapCanvas.addEventListener("touchend", resetMapTilt);
 }
