@@ -402,10 +402,7 @@ const getMemoryLabel = (index) => {
 const updateLightboxNavLabels = () => {
   if (nextBtn) {
     if (currentIndex === totalItems - 1) {
-      nextBtn.setAttribute(
-        "aria-label",
-        "Ir para a seção Terminou a galeria"
-      );
+      nextBtn.setAttribute("aria-label", "Ir para a seção Terminou a galeria");
     } else {
       nextBtn.setAttribute(
         "aria-label",
